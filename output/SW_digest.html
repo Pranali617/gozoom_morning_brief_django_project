@@ -1,0 +1,511 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gozoom Daily Digest</title>
+    <link rel="stylesheet" href="/static/css/style.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <style>
+        :root {
+            --text-color: #000000;
+            --highlight-text: #e6770f;
+            color-scheme: light dark;
+        }
+
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --background-color: #121212;
+                --text-color: #ffffff;
+                --highlight-background: #ffeb3b;
+                --highlight-text: #000000;
+            }
+        }
+
+        body {
+            margin: 8px;
+            background-color: var(--background-color);
+            color: var(--text-color);
+        }
+
+        .highlight {
+            background-color: var(--highlight-background);
+            color: var(--highlight-text);
+            padding: 1px;
+        }
+
+        table {
+            border-collapse: separate;
+            border-spacing: 2px;
+            width: 98%;
+            margin: auto;
+        }
+
+        td {
+            font-family: Verdana, Helvetica, sans-serif;
+            font-size: 13px;
+            vertical-align: top;
+        }
+
+        .first-td {
+            text-align: center;
+            word-break: break-all;
+        }
+
+        .second-td {
+            text-align: left;
+        }
+
+        .entry_title_text {
+            font-size: 14px;
+            color: #0000ee;
+        }
+
+        .toggle-btn {
+            color: blue;
+            cursor: pointer;
+            font-weight: bold;
+            margin-left: 5px;
+        }
+
+        .sort-indicator {
+            font-size: 12px;
+            margin-left: 5px;
+        }
+
+        .comment-link {
+            font-weight: bold;
+            color: #0000ee;
+            text-decoration: none;
+        }
+
+        .even {
+            background-color: #f7f3e0;
+        }
+
+        .odd {
+            background-color: #f8f7f0;
+        }
+
+        .special-row {
+            background-color: #ffffff;
+            font-weight: bold;
+        }
+
+        .special-row td {
+            font-size: 14px;
+            padding-left: 12px;
+        }
+
+        .dot_class {
+            color: #999999;
+            font-size: 9px;
+        }
+    </style>
+</head>
+
+<body>
+    <table id="entries_table" cellpadding="5" cellspacing="1" bgcolor="#DDDDDD">
+        <thead>
+            <tr bgcolor="#999999" height="25">
+                <td onclick="sortImagesByAlt()" style="cursor:pointer; color:white;">
+                    <b>From</b>
+                    <span class="sort-indicator" id="sort-icon-from">▼</span>
+                </td>
+                <td onclick="sortAlertsByTitle()" style="cursor:pointer; color:white;" width="90%">
+                    <b>Alerts</b>
+                    <span class="sort-indicator" id="sort-icon-alerts">▼</span>
+                </td>
+                <td style="color:white;">
+                    <b>Rate</b>
+                </td>
+                <td onclick="sortAlertsByAge()" style="cursor:pointer; color:white;">
+                    <b>Age</b>
+                    <span class="sort-indicator" id="sort-icon-age">▼</span>
+                </td>
+            </tr>
+        </thead>
+        <tbody>
+            
+            
+            <tr class="odd">
+                <td class="first-td">
+                    <img src="" width="25" height="25">
+                </td>
+                <td colspan="3" class="second-td">
+                    <span hidden class="alert-id">1</span>
+                    <span>
+                        <b class="entry_title_text">
+                            <a href="https://docs.google.com/spreadsheets/d/1_v0e94SwvzJku44nGpbpdVzEboyjDAS0oo0LZfuvnI4/edit#gid=1386108690&fvid=133023009" target="_blank">SW missed to score KPI TY Sept 02   KPI spec.ipynb</a>
+                        </b>
+                    </span>
+                    <span class="seperator"> | </span>
+                    <span class="alert-summary">SW missed to Review and Set Score of TY KPI spec.ipynb to 85%</span>
+                    <span class="seperator"> | </span>
+                    <span>
+                        <a href="https://docs.google.com/spreadsheets/d/1_v0e94SwvzJku44nGpbpdVzEboyjDAS0oo0LZfuvnI4/edit#gid=1386108690&fvid=133023009" target="_blank">Original Source</a>
+                    </span>
+                    <span class="seperator"> | </span>
+                    <span class="category alert-summary">Review</span>
+                    <span class="seperator"> | </span>
+                    <span class="like-dislike">
+                        <a href="http://localhost:9005/like?id=1">Like</a>
+                    </span>
+                    <span class="dot_class">•</span>
+                    <span class="like-dislike">
+                        <a href="http://localhost:9005/dislike?id=1">Dislike</a>
+                    </span>
+                    <span class="seperator"> | </span>
+                    <span class="age">33d</span>
+                </td>
+            </tr>
+            
+            <tr class="even">
+                <td class="first-td">
+                    <img src="" width="25" height="25">
+                </td>
+                <td colspan="3" class="second-td">
+                    <span hidden class="alert-id">2</span>
+                    <span>
+                        <b class="entry_title_text">
+                            <a href="https://docs.google.com/spreadsheets/d/1_v0e94SwvzJku44nGpbpdVzEboyjDAS0oo0LZfuvnI4/edit#gid=1386108690&fvid=133023009" target="_blank">Info KPI spec.ipynb Status SW missed to score KPI for TY</a>
+                        </b>
+                    </span>
+                    <span class="seperator"> | </span>
+                    <span class="alert-summary">SW missed to Review and Set Score of TY KPI spec.ipynb to 85%</span>
+                    <span class="seperator"> | </span>
+                    <span>
+                        <a href="https://docs.google.com/spreadsheets/d/1_v0e94SwvzJku44nGpbpdVzEboyjDAS0oo0LZfuvnI4/edit#gid=1386108690&fvid=133023009" target="_blank">Original Source</a>
+                    </span>
+                    <span class="seperator"> | </span>
+                    <span class="category alert-summary">Review</span>
+                    <span class="seperator"> | </span>
+                    <span class="like-dislike">
+                        <a href="http://localhost:9005/like?id=2">Like</a>
+                    </span>
+                    <span class="dot_class">•</span>
+                    <span class="like-dislike">
+                        <a href="http://localhost:9005/dislike?id=2">Dislike</a>
+                    </span>
+                    <span class="seperator"> | </span>
+                    <span class="age">33d</span>
+                </td>
+            </tr>
+            
+            <tr class="odd">
+                <td class="first-td">
+                    <img src="" width="25" height="25">
+                </td>
+                <td colspan="3" class="second-td">
+                    <span hidden class="alert-id">3</span>
+                    <span>
+                        <b class="entry_title_text">
+                            <a href="https://docs.google.com/spreadsheets/d/1_v0e94SwvzJku44nGpbpdVzEboyjDAS0oo0LZfuvnI4/edit#gid=1386108690&fvid=133023009" target="_blank">SL did not set score to 2% for SL Sept 02   KPI Spec</a>
+                        </b>
+                    </span>
+                    <span class="seperator"> | </span>
+                    <span class="alert-summary">Please set Actual score to 2% for task SL Sept 02   KPI Spec in KPI spec.ipynb so SW can review it</span>
+                    <span class="seperator"> | </span>
+                    <span>
+                        <a href="https://docs.google.com/spreadsheets/d/1_v0e94SwvzJku44nGpbpdVzEboyjDAS0oo0LZfuvnI4/edit#gid=1386108690&fvid=133023009" target="_blank">Original Source</a>
+                    </span>
+                    <span class="seperator"> | </span>
+                    <span class="category alert-summary">Review</span>
+                    <span class="seperator"> | </span>
+                    <span class="like-dislike">
+                        <a href="http://localhost:9005/like?id=3">Like</a>
+                    </span>
+                    <span class="dot_class">•</span>
+                    <span class="like-dislike">
+                        <a href="http://localhost:9005/dislike?id=3">Dislike</a>
+                    </span>
+                    <span class="seperator"> | </span>
+                    <span class="age">33d</span>
+                </td>
+            </tr>
+            
+            <tr class="even">
+                <td class="first-td">
+                    <img src="" width="25" height="25">
+                </td>
+                <td colspan="3" class="second-td">
+                    <span hidden class="alert-id">4</span>
+                    <span>
+                        <b class="entry_title_text">
+                            <a href="https://docs.google.com/spreadsheets/d/1_v0e94SwvzJku44nGpbpdVzEboyjDAS0oo0LZfuvnI4/edit#gid=1386108690&fvid=133023009" target="_blank">MM did not set score to 2% for MM Sept 02   KPI Spec</a>
+                        </b>
+                    </span>
+                    <span class="seperator"> | </span>
+                    <span class="alert-summary">Please set Actual score to 2% for task MM Sept 02   KPI Spec in KPI spec.ipynb so SW can review it</span>
+                    <span class="seperator"> | </span>
+                    <span>
+                        <a href="https://docs.google.com/spreadsheets/d/1_v0e94SwvzJku44nGpbpdVzEboyjDAS0oo0LZfuvnI4/edit#gid=1386108690&fvid=133023009" target="_blank">Original Source</a>
+                    </span>
+                    <span class="seperator"> | </span>
+                    <span class="category alert-summary">Review</span>
+                    <span class="seperator"> | </span>
+                    <span class="like-dislike">
+                        <a href="http://localhost:9005/like?id=4">Like</a>
+                    </span>
+                    <span class="dot_class">•</span>
+                    <span class="like-dislike">
+                        <a href="http://localhost:9005/dislike?id=4">Dislike</a>
+                    </span>
+                    <span class="seperator"> | </span>
+                    <span class="age">33d</span>
+                </td>
+            </tr>
+            
+            <tr class="odd">
+                <td class="first-td">
+                    <img src="" width="25" height="25">
+                </td>
+                <td colspan="3" class="second-td">
+                    <span hidden class="alert-id">5</span>
+                    <span>
+                        <b class="entry_title_text">
+                            <a href="https://docs.google.com/spreadsheets/d/1_v0e94SwvzJku44nGpbpdVzEboyjDAS0oo0LZfuvnI4/edit#gid=1386108690&fvid=133023009" target="_blank">WY did not set score to 2% for WY Sept 02   KPI Spec</a>
+                        </b>
+                    </span>
+                    <span class="seperator"> | </span>
+                    <span class="alert-summary">Please set Actual score to 2% for task WY Sept 02   KPI Spec in KPI spec.ipynb so SW can review it</span>
+                    <span class="seperator"> | </span>
+                    <span>
+                        <a href="https://docs.google.com/spreadsheets/d/1_v0e94SwvzJku44nGpbpdVzEboyjDAS0oo0LZfuvnI4/edit#gid=1386108690&fvid=133023009" target="_blank">Original Source</a>
+                    </span>
+                    <span class="seperator"> | </span>
+                    <span class="category alert-summary">Review</span>
+                    <span class="seperator"> | </span>
+                    <span class="like-dislike">
+                        <a href="http://localhost:9005/like?id=5">Like</a>
+                    </span>
+                    <span class="dot_class">•</span>
+                    <span class="like-dislike">
+                        <a href="http://localhost:9005/dislike?id=5">Dislike</a>
+                    </span>
+                    <span class="seperator"> | </span>
+                    <span class="age">33d</span>
+                </td>
+            </tr>
+            
+            <tr class="even">
+                <td class="first-td">
+                    <img src="" width="25" height="25">
+                </td>
+                <td colspan="3" class="second-td">
+                    <span hidden class="alert-id">6</span>
+                    <span>
+                        <b class="entry_title_text">
+                            <a href="https://docs.google.com/spreadsheets/d/1_v0e94SwvzJku44nGpbpdVzEboyjDAS0oo0LZfuvnI4/edit#gid=1386108690&fvid=133023009" target="_blank">TY did not set score to 2% for TY Sept 02   KPI spec.ipynb</a>
+                        </b>
+                    </span>
+                    <span class="seperator"> | </span>
+                    <span class="alert-summary">Please set Actual score to 2% for task TY Sept 02   KPI spec.ipynb in KPI spec.ipynb so SW can review it</span>
+                    <span class="seperator"> | </span>
+                    <span>
+                        <a href="https://docs.google.com/spreadsheets/d/1_v0e94SwvzJku44nGpbpdVzEboyjDAS0oo0LZfuvnI4/edit#gid=1386108690&fvid=133023009" target="_blank">Original Source</a>
+                    </span>
+                    <span class="seperator"> | </span>
+                    <span class="category alert-summary">Review</span>
+                    <span class="seperator"> | </span>
+                    <span class="like-dislike">
+                        <a href="http://localhost:9005/like?id=6">Like</a>
+                    </span>
+                    <span class="dot_class">•</span>
+                    <span class="like-dislike">
+                        <a href="http://localhost:9005/dislike?id=6">Dislike</a>
+                    </span>
+                    <span class="seperator"> | </span>
+                    <span class="age">21d</span>
+                </td>
+            </tr>
+            
+            <tr class="odd">
+                <td class="first-td">
+                    <img src="" width="25" height="25">
+                </td>
+                <td colspan="3" class="second-td">
+                    <span hidden class="alert-id">7</span>
+                    <span>
+                        <b class="entry_title_text">
+                            <a href="https://docs.google.com/spreadsheets/d/1_v0e94SwvzJku44nGpbpdVzEboyjDAS0oo0LZfuvnI4/edit#gid=1386108690&fvid=133023009" target="_blank">Info KPI spec.ipynb Status SW missed to score KPI for TY</a>
+                        </b>
+                    </span>
+                    <span class="seperator"> | </span>
+                    <span class="alert-summary">SW missed to Review and Set Score of TY KPI spec.ipynb to 85%</span>
+                    <span class="seperator"> | </span>
+                    <span>
+                        <a href="https://docs.google.com/spreadsheets/d/1_v0e94SwvzJku44nGpbpdVzEboyjDAS0oo0LZfuvnI4/edit#gid=1386108690&fvid=133023009" target="_blank">Original Source</a>
+                    </span>
+                    <span class="seperator"> | </span>
+                    <span class="category alert-summary">Review</span>
+                    <span class="seperator"> | </span>
+                    <span class="like-dislike">
+                        <a href="http://localhost:9005/like?id=7">Like</a>
+                    </span>
+                    <span class="dot_class">•</span>
+                    <span class="like-dislike">
+                        <a href="http://localhost:9005/dislike?id=7">Dislike</a>
+                    </span>
+                    <span class="seperator"> | </span>
+                    <span class="age">21d</span>
+                </td>
+            </tr>
+            
+            <tr class="even">
+                <td class="first-td">
+                    <img src="" width="25" height="25">
+                </td>
+                <td colspan="3" class="second-td">
+                    <span hidden class="alert-id">8</span>
+                    <span>
+                        <b class="entry_title_text">
+                            <a href="https://docs.google.com/spreadsheets/d/1_v0e94SwvzJku44nGpbpdVzEboyjDAS0oo0LZfuvnI4/edit#gid=1386108690&fvid=133023009" target="_blank">SL did not set score to 2% for SL Sept 02   KPI Spec</a>
+                        </b>
+                    </span>
+                    <span class="seperator"> | </span>
+                    <span class="alert-summary">Please set Actual score to 2% for task SL Sept 02   KPI Spec in KPI spec.ipynb so SW can review it</span>
+                    <span class="seperator"> | </span>
+                    <span>
+                        <a href="https://docs.google.com/spreadsheets/d/1_v0e94SwvzJku44nGpbpdVzEboyjDAS0oo0LZfuvnI4/edit#gid=1386108690&fvid=133023009" target="_blank">Original Source</a>
+                    </span>
+                    <span class="seperator"> | </span>
+                    <span class="category alert-summary">Review</span>
+                    <span class="seperator"> | </span>
+                    <span class="like-dislike">
+                        <a href="http://localhost:9005/like?id=8">Like</a>
+                    </span>
+                    <span class="dot_class">•</span>
+                    <span class="like-dislike">
+                        <a href="http://localhost:9005/dislike?id=8">Dislike</a>
+                    </span>
+                    <span class="seperator"> | </span>
+                    <span class="age">21d</span>
+                </td>
+            </tr>
+            
+            <tr class="odd">
+                <td class="first-td">
+                    <img src="" width="25" height="25">
+                </td>
+                <td colspan="3" class="second-td">
+                    <span hidden class="alert-id">9</span>
+                    <span>
+                        <b class="entry_title_text">
+                            <a href="https://docs.google.com/spreadsheets/d/1_v0e94SwvzJku44nGpbpdVzEboyjDAS0oo0LZfuvnI4/edit#gid=1386108690&fvid=133023009" target="_blank">MM did not set score to 2% for MM Sept 02   KPI Spec</a>
+                        </b>
+                    </span>
+                    <span class="seperator"> | </span>
+                    <span class="alert-summary">Please set Actual score to 2% for task MM Sept 02   KPI Spec in KPI spec.ipynb so SW can review it</span>
+                    <span class="seperator"> | </span>
+                    <span>
+                        <a href="https://docs.google.com/spreadsheets/d/1_v0e94SwvzJku44nGpbpdVzEboyjDAS0oo0LZfuvnI4/edit#gid=1386108690&fvid=133023009" target="_blank">Original Source</a>
+                    </span>
+                    <span class="seperator"> | </span>
+                    <span class="category alert-summary">Review</span>
+                    <span class="seperator"> | </span>
+                    <span class="like-dislike">
+                        <a href="http://localhost:9005/like?id=9">Like</a>
+                    </span>
+                    <span class="dot_class">•</span>
+                    <span class="like-dislike">
+                        <a href="http://localhost:9005/dislike?id=9">Dislike</a>
+                    </span>
+                    <span class="seperator"> | </span>
+                    <span class="age">21d</span>
+                </td>
+            </tr>
+            
+            <tr class="even">
+                <td class="first-td">
+                    <img src="" width="25" height="25">
+                </td>
+                <td colspan="3" class="second-td">
+                    <span hidden class="alert-id">10</span>
+                    <span>
+                        <b class="entry_title_text">
+                            <a href="https://docs.google.com/spreadsheets/d/1_v0e94SwvzJku44nGpbpdVzEboyjDAS0oo0LZfuvnI4/edit#gid=1386108690&fvid=133023009" target="_blank">ST did not set score to 2% for ST Sept 02   KPI Spec</a>
+                        </b>
+                    </span>
+                    <span class="seperator"> | </span>
+                    <span class="alert-summary">Please set Actual score to 2% for task ST Sept 02   KPI Spec in KPI spec.ipynb so SW can review it</span>
+                    <span class="seperator"> | </span>
+                    <span>
+                        <a href="https://docs.google.com/spreadsheets/d/1_v0e94SwvzJku44nGpbpdVzEboyjDAS0oo0LZfuvnI4/edit#gid=1386108690&fvid=133023009" target="_blank">Original Source</a>
+                    </span>
+                    <span class="seperator"> | </span>
+                    <span class="category alert-summary">Review</span>
+                    <span class="seperator"> | </span>
+                    <span class="like-dislike">
+                        <a href="http://localhost:9005/like?id=10">Like</a>
+                    </span>
+                    <span class="dot_class">•</span>
+                    <span class="like-dislike">
+                        <a href="http://localhost:9005/dislike?id=10">Dislike</a>
+                    </span>
+                    <span class="seperator"> | </span>
+                    <span class="age">21d</span>
+                </td>
+            </tr>
+            
+            <tr class="odd">
+                <td class="first-td">
+                    <img src="" width="25" height="25">
+                </td>
+                <td colspan="3" class="second-td">
+                    <span hidden class="alert-id">11</span>
+                    <span>
+                        <b class="entry_title_text">
+                            <a href="https://docs.google.com/spreadsheets/d/1_v0e94SwvzJku44nGpbpdVzEboyjDAS0oo0LZfuvnI4/edit#gid=1386108690&fvid=133023009" target="_blank">WY did not set score to 2% for WY Sept 02   KPI Spec</a>
+                        </b>
+                    </span>
+                    <span class="seperator"> | </span>
+                    <span class="alert-summary">Please set Actual score to 2% for task WY Sept 02   KPI Spec in KPI spec.ipynb so SW can review it</span>
+                    <span class="seperator"> | </span>
+                    <span>
+                        <a href="https://docs.google.com/spreadsheets/d/1_v0e94SwvzJku44nGpbpdVzEboyjDAS0oo0LZfuvnI4/edit#gid=1386108690&fvid=133023009" target="_blank">Original Source</a>
+                    </span>
+                    <span class="seperator"> | </span>
+                    <span class="category alert-summary">Review</span>
+                    <span class="seperator"> | </span>
+                    <span class="like-dislike">
+                        <a href="http://localhost:9005/like?id=11">Like</a>
+                    </span>
+                    <span class="dot_class">•</span>
+                    <span class="like-dislike">
+                        <a href="http://localhost:9005/dislike?id=11">Dislike</a>
+                    </span>
+                    <span class="seperator"> | </span>
+                    <span class="age">21d</span>
+                </td>
+            </tr>
+            
+
+            
+        </tbody>
+    </table>
+
+    <script>
+        function expandText(id, fullText) {
+            let summaryElement = document.getElementById("summary-" + id);
+            let toggleButton = document.getElementById("toggle-" + id);
+            let isCollapsed = toggleButton.innerText === "[+]";
+
+            if (isCollapsed) {
+                summaryElement.innerHTML = fullText;
+                toggleButton.innerText = "[-]";
+            } else {
+                summaryElement.innerHTML = fullText.substring(0, 200);
+                toggleButton.innerText = "[+]";
+            }
+        }
+
+        let isImageAsc = true;
+        function sortImagesByAlt() {
+            const tbody = document.querySelector("#entries_table tbody");
+            const rows = Array.from(tbody.rows);
+            rows.sort((a, b) => {
+                let altA = a.querySelector("img").alt.toLowerCase();
+                let altB = b.querySelector("img").alt.toLowerCase();
+                return isImageAsc ? altA.localeCompare(altB) : altB.localeCompare(altA);
